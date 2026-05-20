@@ -7,9 +7,10 @@ A data science project built on a Kaggle dataset of 3,045 Goodreads books, with 
 
 ## Dashboard
 
-![Goodreads Books Analysis Dashboard](goodreads_dashboard.png)
+![Goodreads Books Analysis Dashboard](Goodreads%20Queries/goodreads%20dashboard%20screenshot.png)
 
-The dashboard brings together all five analyses into a single view. Each chart addresses a specific dimension of the platform question — from how ratings are distributed, to how popularity relates to quality, to how series books behave across rank groups. The charts are discussed individually below.
+---
+
 
 ---
 
