@@ -49,92 +49,21 @@ This data is by no means exhaustive and high ratings may not vouch for the quali
 
 ---
 
-# Goodreads Books — End-to-End Data Science Project
-
-A full data science pipeline built on a Kaggle dataset of 3,045 Goodreads books. The project is framed from the perspective of a publishing house deciding whether to use Goodreads as a marketing and distribution channel for its titles.
-
----
-
-## Project Overview
-
-| Stage | Tool | Output |
-|---|---|---|
-| Data collection | Kaggle | Raw dataset (3,045 books) |
-| Data cleaning | Python + Excel | `goodreads_books_cleaned.csv` |
-| Feature engineering | Python (Pandas) | `GOODREADS_dataset_cleaned.csv` |
-| SQL analysis | PostgreSQL (DBeaver) | 5 business insights |
-| Dashboard | Tableau | `goodreads_dashboard.png` |
-| Machine learning | Python (scikit-learn) | Rating and tier prediction models |
-
----
-
-## Business Question
-
-> Should the publishing house partner with Goodreads to market its titles, or invest in building a proprietary reader platform from the ground up?
-
-The SQL analysis examines the platform itself — how ratings work, how popularity is distributed, how series content performs — to determine whether Goodreads is the right environment to invest in. The machine learning section then asks the operational follow-up: once the publishing house commits to Goodreads, can it predict how its books will perform on the platform before allocating marketing budget?
-
----
-
-## Dashboard
-
-![Goodreads Books Analysis Dashboard](goodreads_dashboard.png)
-
-The dashboard brings together the five analyses into a single view. Each chart addresses a specific dimension of the platform question — from how ratings are distributed, to how popularity relates to quality, to how series books behave across rank groups. The charts are discussed individually below.
-
----
-
-## Rating Distribution
-
-60% of the 3,045 books in the dataset are rated Excellent, meaning they carry a rating of 4.0 or above. Only 3 books fall below Good. The average rating sits at 4.06 out of 5, with a median of 4.07 — confirming the distribution is not normal but heavily skewed toward the top end. This is not a reflection of exceptional book quality across the board. It reflects a well-documented bias in user-generated rating systems where readers tend to rate books they finished and enjoyed, leaving unread or abandoned books unrated. For a publishing house, this is useful context: the Goodreads rating environment is forgiving, and most titles that make it onto the platform settle into the Good-to-Excellent band rather than the bottom of the scale.
-
----
-
-## Popularity vs Rating
-
-High popularity books average 4.42 stars. Low popularity books average 3.67 stars. The 0.74 gap across the five popularity tiers is consistent and visible in the chart, with the overall average reference line at 4.058 sitting between the Average and Above Average tiers. This relationship confirms that Goodreads' recommendation engine has broadly matched quality content to popular audiences — books that rate well tend to be the ones readers find and engage with. The ceiling for Low popularity books is 3.84, meaning no genuinely high-quality book is being buried by the algorithm. This is an argument in favour of partnership rather than a full rebuild. The discovery infrastructure is functional and would be expensive to replicate from scratch.
-
----
-
-## Series by Rank
-
-Series books account for 37.5% of the full dataset and average 4.084 stars compared to 4.042 for standalone titles. The more interesting finding is how series books are distributed across rank groups. They peak in the 1001–2000 rank range at 426 books, not in the top 500 as might be expected. The top 500 contains 178 series books versus 322 standalone titles. This suggests that series readership drives sustained mid-tier engagement rather than top-end ratings. Readers who commit to a series rate consistently but not necessarily at the highest levels. A publishing house with a strong series catalog has a defined audience to reach on Goodreads, particularly in the mid-tier range where series content concentrates.
-
----
-
-## Title Complexity
-
-Books with Complex and Very Complex titles average 4.13 stars, compared to 3.99 for Simple titles. Moderate titles sit at the overall average of 4.06. The reference line at 4.058 makes the split clear: complexity above Moderate correlates with above-average ratings, complexity at or below Moderate does not. This is not a causal relationship between title length and quality. It reflects genre composition. Academic texts, literary non-fiction, and specialist books carry longer, more structured titles and attract audiences who rate deliberately and with high standards. For the publishing house, this suggests that more complex or specialist titles will land in a more rating-favourable audience segment on Goodreads.
-
----
-
-## Tier Distribution
-
-The 3,045 books are distributed across 10 rating tiers, with counts ranging from 270 in Tier_7 to 344 in Tier_3. No single tier dominates. The range across all ten tiers is just 74 books. This even distribution confirms that the dataset represents the full quality spectrum rather than being skewed toward top performers. For the partnership decision, this breadth is significant — Goodreads holds books at every quality level, meaning the publishing house's titles will find their place in the catalog regardless of where they fall on the quality scale.
-
----
-
-## Recommendation
-
-The data supports a partnership approach rather than a full platform rebuild. Goodreads holds two assets that would take years to replicate: a large, well-distributed catalog and a recommendation engine that has broadly matched quality to popular audiences. What it does not offer is an honest rating system, meaningful series UX, or granular genre segmentation. These are weaknesses the publishing house should be aware of but they do not warrant building a competing platform from scratch. The most efficient path is partnership: market titles on Goodreads, use the existing community infrastructure, and benefit from the established discovery patterns the analysis identified.
-
----
-
 ## Machine Learning
 
-With the partnership recommendation established through the SQL analysis, the next operational question is whether the publishing house can predict how its books will perform on Goodreads before committing marketing budget. Three algorithms were tested: Linear Regression as an interpretable baseline, Random Forest as a tree ensemble, and Gradient Boosting as a sequential ensemble. All models used only structural features available before a book accumulates reader ratings — title length, word count, author name length, series position, author book count, and related metadata.
+With the partnership recommendation established through the SQL analysis, the next question becomes whether the publishing house can predict how its books will perform on Goodreads before submitting them. Three algorithms were tested: Linear Regression, Random Forest, and Gradient Boosting. All models used only structural features in this dataset
 
-A leakage audit was conducted before modelling. Several columns in the dataset — including `is_top_performer`, `estimated_popularity`, `rank`, and `percentile_rank` — are mathematically derived from the rating itself. Using them as predictors produces artificially inflated results. All were excluded from the final feature set.
+A leakage was found before modelling. Some columns in the dataset such as `is_top_performer`, `estimated_popularity`, `rank`, and `percentile_rank` come from the rating itself. Using them as predictors produces artificially inflated results so they were excluded from the result.
 
 ### Model Performance
 
-![Model comparison](ml_model_comparison.png)
+![Model comparison](Goodreads%20notebook/ml_model_comparison.png)
 
-Gradient Boosting is the only model that meaningfully beats the naive baseline, explaining roughly 9.4% of the variance in book ratings. Random Forest overfits on this small, low-signal dataset and produces a negative R², performing worse than simply predicting the average rating for every book. Linear Regression captures a small amount of signal at R² of 0.047. The dashed line at zero is the reference point — anything to the right is doing real work, anything to the left is not.
+Gradient Boosting is the only model that meaningfully beats the naive baseline, explaining roughly 9.4% of the variance in book ratings. Random Forest overfits on this small, low-signal dataset and produces a negative R², performing worse than simply predicting the average rating for every book. Linear Regression captures a small amount of signal at R² of 0.047. The dashed line at zero is the reference point anything to the right is doing real work, anything to the left is not.
 
 ### What Drives the Predictions
 
-![Feature importance](ml_feature_importance.png)
+![Feature importance](Goodreads%20notebook/ml_feature_importance.png)
 
 Title length is the single strongest signal at 0.320, followed by word count at 0.185 and author name length at 0.173. Series position and author book count round out the top five. Title complexity — which the dashboard analysis identified as a visible differentiator between rating categories — ranks near the bottom at 0.014. Its dashboard-level effect is real but small, and is largely captured by the more granular title length and word count features.
 
