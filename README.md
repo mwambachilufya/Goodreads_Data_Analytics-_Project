@@ -51,7 +51,7 @@ This data is by no means exhaustive and high ratings may not vouch for the quali
 
 ## Machine Learning
 
-With the partnership recommendation established through the SQL analysis, the next question becomes whether the publishing house can predict how its books will perform on Goodreads before submitting them. Three algorithms were tested: Linear Regression, Random Forest, and Gradient Boosting. All models used only structural features in this dataset
+With the partnership recommendation established through the SQL analysis, the next question becomes whether the publishing house can predict how its books will perform on Goodreads before submitting them. Three algorithms were tested: Linear Regression, Random Forest, and Gradient Boosting. All models used only some of the features in this dataset
 
 A leakage was found before modelling. Some columns in the dataset such as `is_top_performer`, `estimated_popularity`, `rank`, and `percentile_rank` come from the rating itself. Using them as predictors produces artificially inflated results so they were excluded from the result.
 
@@ -59,18 +59,16 @@ A leakage was found before modelling. Some columns in the dataset such as `is_to
 
 ![Model comparison](Goodreads%20notebook/ml_model_comparison.png)
 
-Gradient Boosting is the only model that meaningfully beats the naive baseline, explaining roughly 9.4% of the variance in book ratings. Random Forest overfits on this small, low-signal dataset and produces a negative R², performing worse than simply predicting the average rating for every book. Linear Regression captures a small amount of signal at R² of 0.047. The dashed line at zero is the reference point anything to the right is doing real work, anything to the left is not.
+Gradient Boosting is the only model that beats the naive baseline significantly, explaining roughly 9.4% of the variance in book ratings. Random Forest overfits on this small, and produces a negative R². It performs worse than simply predicting the average rating for every book. Linear Regression gives us a small amount of signal at R² of 0.047. The dashed line at zero is the reference point anything to the right performs well and anything to the left fails.
 
 ### What Drives the Predictions
 
 ![Feature importance](Goodreads%20notebook/ml_feature_importance.png)
 
-Title length is the single strongest signal at 0.320, followed by word count at 0.185 and author name length at 0.173. Series position and author book count round out the top five. Title complexity — which the dashboard analysis identified as a visible differentiator between rating categories — ranks near the bottom at 0.014. Its dashboard-level effect is real but small, and is largely captured by the more granular title length and word count features.
+So according to this dataset, Title length is the strongest feature at 0.320, followed by word count at 0.185 and author name length at 0.173. Series position and author book count round out the top five. Title complexity — which the dashboard analysis identified as a visible differentiator between rating categories — ranks near the bottom at 0.014. So base don this if one knew nothing about books, they would simply make their title length larger and increase the word count of the books. This would get them to have a good rating on goodreads. But we know that in the reall world it takes a lot more than just title lwngth and number of words to be a highly rated book. However for the sake of model performance this is the best route to getting a high rating on goodreads according to the models. 
 
 ### Recommendation
 
-The modelling confirms that structural metadata alone is not a reliable enough signal to automate marketing decisions. The best model explains less than 10% of why books receive the ratings they do on Goodreads. The remaining 90% is driven by the actual content, reader experience, timing, and community dynamics that no pre-publication metadata can capture.
-
-This does not weaken the partnership case — it refines it. The publishing house should partner with Goodreads for catalog reach and community infrastructure, but marketing budget allocation should remain a human decision informed by editorial judgement and early reader feedback rather than a model output. The structural signals identified here — title length, author profile, and series position — can serve as secondary grouping tools but not as primary quality predictors.
+The earlier analysis is helpful and is grounded in data that partnering with goodreads for marketing purposes and discoverability is way better than building ones own platform. However,  actual content, reader experience, timing, and community dynamics contribute almost 90 % of what it takes to be a highly rated book on goodreads. Not just the structure of a book. the latter does not hold much say in determining ratings. 
 
 ---
