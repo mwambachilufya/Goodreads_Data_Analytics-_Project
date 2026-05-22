@@ -13,7 +13,7 @@ The dashboard shows areas of focus that were investigated in order to detrmine w
 
 ## Rating Distribution
 
-60% of the 3,045 books in the dataset are rated Excellent this means they carry a rating of 4.0 or above. Only 3 books fall below Good. The average rating sits at 4.06 out of 5 with a median of 4.07. This means that the data is concenttrated and leans towards the top. Most ratings are excellent this could mean that users can be engaged and excited about a reader's work once they love it.This would be encouraging for a publisher and creates a good environment around an authors work. 
+60% of the 3,045 books in the dataset are rated Excellent this means they carry a rating of 4.0 or above. Only 3 books fall below Good. The average rating sits at 4.06 out of 5 with a median of 4.07. This means that the data is concentrated and leans towards the top. Most ratings are excellent this could mean that users can be engaged and excited about a Author's work once they love any of their books.This would be encouraging for a publisher and creates a good environment around an authors work. 
 
 ---
 
@@ -31,7 +31,7 @@ Series books account for 37.5% of the full dataset and average 4.084 stars compa
 
 ## Title Complexity
 
-Books with Complex and Very Complex titles average 4.13 stars, compared to 3.99 for Simple titles. Moderate titles sit at the overall average of 4.06. The reference line at 4.058 makes the split clear: complexity above Moderate correlates with above-average ratings and complexity that is at or below Moderate does not.This says more about the kind of readers that are found on goodreads. The more intellectual and engaging kind of readers. This the publishing house determine what type of books will garner much ratings. 
+Books with Complex and Very Complex titles average 4.13 stars, compared to 3.99 for Simple titles. Moderate titles sit at the overall average of 4.06. The reference line at 4.058 makes the split clear: complexity above Moderate correlates with above-average ratings and complexity that is at or below Moderate does not.This says more about the kind of readers that are found on goodreads. The more intellectual and engaging kind of readers. This helps the publishing house determine what type of books will garner much ratings. 
 
 ---
 
@@ -43,9 +43,9 @@ The 3,045 books are distributed across 10 rating tiers, with counts ranging from
 
 ## Recommendation
 
-The data supports a partnership approach rather than a full platform rebuild. Goodreads has the following advantages: a) There is equal representation and marketing of books despite the quality. As shown in the tier distribution chart. Even if the representation is smaller goodreads has such a wide readersip built over many years that their is guranteed engagement with all types of books so there will be representation and marketing opportunites. b) Potential for widespread popularity if a book is rated higher. if the publishng house has a very highly rated book the chances are higher that it will become popular and more popularity will increase ratings. purely from a marketing standpoint this is a golden opportunity as this could lead to actual sales in physical copies or purchases online on plaatforms like Amazon. c) The community is present but also higly intellectual and engaging. Valuable information for what kinds of people you find on the platform. ALso, what the publishing house can focus on marketing. 
+The data supports a partnership approach rather than a full platform rebuild. Goodreads has the following advantages: a) There is equal representation and marketing of books despite the quality. As shown in the tier distribution chart. Even if the representation is smaller goodreads has such a wide readersip built over many years that their is guranteed engagement with all types of books so there will be representation and marketing opportunites. b) Potential for widespread popularity if a book is rated higher. if the publishing house has a very highly rated book the chances are higher that it will become popular and more popularity will increase ratings. purely from a marketing standpoint this is a golden opportunity as this could lead to actual sales in physical copies or purchases online on platforms like Amazon. c) The community is present but also higly intellectual and engaging. Valuable information for what kinds of people you find on the platform. ALso, what the publishing house can focus on marketing. 
 
-This data is by no means exhaustive and high ratings may not vouch for the quality of the book from a subjective stanpoint. But from a publishing house marketing perspective this info could at least guide the authorities and what decisions to make in regard to what types of books to accept and what to publish.
+This data is by no means exhaustive and high ratings may not vouch for the quality of the book from a subjective standpoint. But from a publishing house marketing perspective this info could at least guide the authorities and what decisions to make in regard to what types of books to accept and what to publish.
 
 ---
 
@@ -65,7 +65,7 @@ Gradient Boosting is the only model that beats the naive baseline significantly,
 
 ![Feature importance](Goodreads%20notebook/ml_feature_importance.png)
 
-So according to this dataset, Title length is the strongest feature at 0.320, followed by word count at 0.185 and author name length at 0.173. Series position and author book count round out the top five. Title complexity — which the dashboard analysis identified as a visible differentiator between rating categories — ranks near the bottom at 0.014. So base don this if one knew nothing about books, they would simply make their title length larger and increase the word count of the books. This would get them to have a good rating on goodreads. But we know that in the reall world it takes a lot more than just title lwngth and number of words to be a highly rated book. However for the sake of model performance this is the best route to getting a high rating on goodreads according to the models. 
+So according to this dataset, Title length is the strongest feature at 0.320, followed by word count at 0.185 and author name length at 0.173. Series position and author book count round out the top five. Title complexity — which the dashboard analysis identified as a visible differentiator between rating categories — ranks near the bottom at 0.014. So based on this if one knew nothing about books, they would simply make their title length larger and increase the word count of the books. This would get them to have a good rating on goodreads. But we know that in the real world it takes a lot more than just title length and number of words to be a highly rated book. However for the sake of model performance this is the best route to getting a high rating on goodreads according to the models. 
 
 ### Recommendation
 
